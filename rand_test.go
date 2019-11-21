@@ -13,8 +13,14 @@ func ExampleNew() {
 }
 
 func TestNew(t *testing.T) {
-	s := randstr.New(6)
-	t.Logf("%s", s)
+	t.Run("4", func(t *testing.T) {
+		s := randstr.New(4)
+		t.Logf("%s", s)
+	})
+	t.Run("6", func(t *testing.T) {
+		s := randstr.New(6)
+		t.Logf("%s", s)
+	})
 }
 
 func BenchmarkNew(b *testing.B) {
