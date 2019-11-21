@@ -2,8 +2,8 @@
 package randstr
 
 import (
+	"bytes"
 	"math/rand"
-	"strings"
 	"sync"
 	"time"
 )
@@ -25,7 +25,7 @@ type source struct {
 
 // rand 随机字符串
 func (s *source) rand(n int) string {
-	buf := s.Get().(*strings.Builder)
+	buf := s.Get().(*bytes.Buffer)
 	buf.Reset()
 	for i := 0; i < n; i++ {
 		buf.WriteByte(encodeStr[rand.Intn(len(encodeStr))])
@@ -39,7 +39,7 @@ func init() {
 	defaultSource = &source{
 		Pool: sync.Pool{
 			New: func() interface{} {
-				return new(strings.Builder)
+				return new(bytes.Buffer)
 			},
 		},
 	}
